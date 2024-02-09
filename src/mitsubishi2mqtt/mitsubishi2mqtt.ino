@@ -1866,6 +1866,6 @@ void loop() {
 	}
   }
   else {
-     dnsServer.processNextRequest();
+  dnsServer.processNextRequest();
   }
 }
