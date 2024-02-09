@@ -1858,12 +1858,14 @@ void loop() {
 		else if (mqtt_client.state() > MQTT_CONNECTED ) return;
 		//MQTT connected send status
 		else {
-		  hpStatusChanged(hp.getStatus());
-		  mqtt_client.loop();
+      if (mqtt_client.connected()) {
+        hpStatusChanged(hp.getStatus());
+        mqtt_client.loop();
+      }
 		}
 	}
   }
   else {
-    dnsServer.processNextRequest();
+     dnsServer.processNextRequest();
   }
 }
