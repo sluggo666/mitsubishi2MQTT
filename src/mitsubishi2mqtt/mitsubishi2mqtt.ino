@@ -458,6 +458,7 @@ void initCaptivePortal() {
 void initMqtt() {
   mqtt_client.setServer(mqtt_server.c_str(), atoi(mqtt_port.c_str()));
   mqtt_client.setCallback(mqttCallback);
+  mqtt_client.setKeepAlive(30);
   mqttConnect();
 }
 
