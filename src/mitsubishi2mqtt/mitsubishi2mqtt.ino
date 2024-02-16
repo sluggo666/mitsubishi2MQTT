@@ -1659,6 +1659,7 @@ void mqttConnect() {
   // Loop until we're reconnected
   int attempts = 0;
   while (!mqtt_client.connected()) {
+     server.handleClient();
     // Attempt to connect
     mqtt_client.connect(mqtt_client_id.c_str(), mqtt_username.c_str(), mqtt_password.c_str(), ha_availability_topic.c_str(), 1, true, mqtt_payload_unavailable);
     // If state < 0 (MQTT_CONNECTED) => network problem we retry 5 times and then waiting for MQTT_RETRY_INTERVAL_MS and retry reapeatly
@@ -1668,7 +1669,11 @@ void mqttConnect() {
         return;
       }
       else {
-        delay(10);
+        //delay(10);
+        for (int ii=0; ii<10; ii++){
+          delay(1);
+          server.handleClient();
+        }
         attempts++;
       }
     }
